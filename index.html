@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>time to study</title>
+<link href="css/mainpage_style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+	
+<body>
+	<video autoplay muted loop id="video-background">
+        <source src="img/bg.mp4" type="video/mp4">
+    </video>
+	<div class="header">
+		<div class="h-l" id="reloadPage"><i class="fa-solid fa-rotate-right"></i><br>refresh
+		</div>
+		<div class="h-r" id="changeBackground"><i class="fa-solid fa-retweet"></i><br>background
+			<script>
+				document.getElementById('reloadPage').addEventListener('click', function () {
+					location.reload(); 
+				});
+				let isBackgroundChanged = false; 
+				const video = document.getElementById('video-background');
+
+				document.getElementById('changeBackground').addEventListener('click', function () {
+					if (isBackgroundChanged) {
+						video.src = "img/bg.mp4";
+					} else {
+						video.src = "img/another_bg.mp4";
+					}
+
+					isBackgroundChanged = !isBackgroundChanged; 
+					video.load(); 
+				});
+    		</script>
+		</div>
+	</div>
+	<br>
+	<div class="content">
+		<div class="menu">
+					<input type="checkbox" id="music" name="widget" class="menubtn"/>
+					<label for="music"><i class="fa-solid fa-music"></i></label>
+				
+					<input type="checkbox" Id="task" name="widget" class="menubtn"/>
+					<label for="task"><i class="fa-solid fa-list-check"></i></label>
+
+					<input type="checkbox" id="timer" name="widget" class="menubtn"/>
+					<label for="timer"><i class="fa-regular fa-clock"></i></label>
+				
+					<input type="checkbox" id="cal" name="widget" class="menubtn"/>
+					<label for="cal"><i class="fa-regular fa-calendar"></i></label>
+				
+					<input type="checkbox" id="media" name="widget" class="menubtn"/>
+					<label for="media"><i class="fa-brands fa-youtube"></i></label>
+				
+					<input type="checkbox" id="quote" name="widget" class="menubtn"/>
+					<label for="quote"><i class="fa-solid fa-quote-right"></i></label>
+				
+					<input type="checkbox" id="note" name="widget" class="menubtn"/>
+					<label for="note"><i class="fa-solid fa-note-sticky"></i></label>
+
+				<div class="widget music">
+					<iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/4Zjli1P13J5mmSCD5iKAXK?utm_source=generator&theme=0" width="323px" height="200px" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+				</div>
+				<div class="widget task">
+					<div>
+						<input type="text" id="taskInput" placeholder="Enter your task">
+						<br>
+						<button onclick="addTask()">Add Task</button>
+					</div>
+
+					<ul id="taskList"></ul>
+
+					<script>
+						function addTask() {
+							const taskInput = document.getElementById('taskInput');
+							const taskText = taskInput.value.trim();
+
+							if (taskText !== '') {
+								const taskList = document.getElementById('taskList');
+
+								const taskItem = document.createElement('li');
+								taskItem.className = 'taskItem';
+
+								const taskCheckbox = document.createElement('input');
+								taskCheckbox.type = 'checkbox'; // Set the type to checkbox
+								taskCheckbox.addEventListener('change', toggleTask);
+
+								const taskTextElement = document.createElement('span');
+								taskTextElement.className = 'taskText';
+								taskTextElement.textContent = taskText;
+
+								taskItem.appendChild(taskCheckbox);
+								taskItem.appendChild(taskTextElement);
+
+								taskList.appendChild(taskItem);
+
+								taskInput.value = ''; // Clear input after adding task
+							}
+						}
+
+						function toggleTask() {
+							const taskTextElement = this.nextElementSibling;
+
+							if (this.checked) {
+								taskTextElement.classList.add('taskCompleted');
+							} else {
+								taskTextElement.classList.remove('taskCompleted');
+							}
+						}
+					</script>
+				</div>
+				<div class="widget timer" >
+					<div class="container">
+					 <div class="clock">
+						<div class="minutes">25</div>
+						<div class="colon">:</div>
+						<div class="seconds">00</div>
+					 </div>
+					 <div class="buttons">
+						<button id="startBtn">Start</button>
+						<button id="stopBtn">Pause</button>
+						<button id="resetBtn">Reset</button>
+					 </div>
+					</div>
+					<script>
+					let timerId;
+					let minutes = 25;
+					let seconds = 0;
+
+					document.getElementById('startBtn').addEventListener('click', () => {
+					 startTimer();
+					});
+
+					document.getElementById('stopBtn').addEventListener('click', () => {
+					 stopTimer();
+					});
+
+					document.getElementById('resetBtn').addEventListener('click', () => {
+					 resetTimer();
+					});
+
+					function startTimer() {
+					 timerId = setInterval(() => {
+						if (seconds > 0) {
+						  seconds--;
+						} else if (minutes > 0) {
+						  minutes--;
+						  seconds = 59;
+						} else {
+						  alert('Timer completed');
+						  stopTimer();
+						}
+						updateDisplay();
+					 }, 1000);
+					}
+
+					function stopTimer() {
+					 clearInterval(timerId);
+					}
+
+					function resetTimer() {
+					 stopTimer();
+					 minutes = 25;
+					 seconds = 0;
+					 updateDisplay();
+					}
+
+					function updateDisplay() {
+					 const minutesElement = document.querySelector('.minutes');
+					 const secondsElement = document.querySelector('.seconds');
+					 minutesElement.textContent = minutes.toString().padStart(2, '0');
+					 secondsElement.textContent = seconds.toString().padStart(2, '0');
+					}	
+						
+					</script>
+				</div>
+				<div class="widget cal" >
+					<div id="calendar"></div>
+						<script>
+							document.addEventListener('DOMContentLoaded', function () {
+								const calendar = document.getElementById('calendar');
+								const currentDate = new Date();
+								const currentYear = currentDate.getFullYear();
+								const currentMonth = currentDate.getMonth();
+								const currentDay = currentDate.getDate();
+
+								function renderCalendar(year, month) {
+									const firstDay = new Date(year, month, 1);
+									const lastDay = new Date(year, month + 1, 0);
+									const daysInMonth = lastDay.getDate();
+
+									calendar.innerHTML = `<div class="calheader">${getMonthName(month)} ${year}</div><div class="days"></div>`;
+
+									const daysContainer = calendar.querySelector('.days');
+
+									for (let i = 0; i < firstDay.getDay(); i++) {
+										const emptyDay = document.createElement('div');
+										emptyDay.classList.add('day', 'empty');
+										daysContainer.appendChild(emptyDay);
+									}
+
+									for (let day = 1; day <= daysInMonth; day++) {
+										const dayElement = document.createElement('div');
+										dayElement.classList.add('day');
+										dayElement.textContent = day;
+										if (year === currentYear && month === currentMonth && day === currentDay) {
+											dayElement.classList.add('today');
+										}
+										daysContainer.appendChild(dayElement);
+									}
+								}
+
+								function getMonthName(month) {
+									const monthNames = [
+										'January', 'February', 'March', 'April',
+										'May', 'June', 'July', 'August',
+										'September', 'October', 'November', 'December'
+									];
+									return monthNames[month];
+								}
+
+								renderCalendar(currentYear, currentMonth);
+							});
+						</script>				
+				</div>
+				<div class="widget media" >
+					<iframe width="323" height="200" src="https://www.youtube.com/embed/jfKfPfyJRdk?si=VqFkwm8w2a3tAYEl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+				</div>
+				<div class="widget quote" >
+					<iframe frameBorder="0" style="width:323px; height:150px" src="https://kwize.com/quote-of-the-day/embed/&txt=0&font=&color=000000&background=ffffff"></iframe><a style="display:block; font-size:12px; color:black;" href="https://kwize.com/quote-of-the-day/"></a>
+				</div>
+				<div class="widget note" >
+					<p>NOTES</p>
+					<div id="textInput" contenteditable="true" >
+					</div>
+				</div>
+		</div>
+	</div>	
+	<div class="footer">
+		<p>Lại Hằng Phương Thư _ 2183003040</p>
+	</div>
+</body>
+</html>

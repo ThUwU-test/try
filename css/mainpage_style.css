@@ -1,0 +1,237 @@
+@charset "utf-8";
+body{
+	margin: 5px;
+    padding: 0;
+    height: 100vh; 
+	display: grid;
+	justify-content: center;
+	color: white;
+	overflow:hidden;
+	background-color: black;
+	text-align: center;
+	font-family:Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace" ;
+}
+.header{
+	width: 1440px;
+	height:80px;
+	display: flex;
+	justify-content: center;
+}
+.header .h-l{
+	width: 191px;
+	margin:auto;
+	cursor: pointer;
+}
+.header .h-r{
+	width: 191px;
+	margin:auto;
+	cursor: pointer;
+}
+.content{
+	width: 100%;
+    height: 100%;
+}
+.menu {
+	width: 100%;
+    height: 768px;
+    display: flex;
+	justify-content: center;
+}
+.menubtn {
+    display: none;
+	top: 135px;
+}
+label {
+    margin: 0 50px;
+    cursor: pointer;
+}
+i{
+	font-size: 20pt;
+}
+.widget {
+    display:none;
+    position: absolute;
+	margin: auto;
+}
+
+#music:checked ~ .widget.music,
+#task:checked ~ .widget.task, 
+#timer:checked ~ .widget.timer,
+#cal:checked ~ .widget.cal,
+#media:checked ~ .widget.media,
+#quote:checked ~ .widget.quote,
+#note:checked ~ .widget.note{
+  display: block;
+}
+.menu .music, .menu .task, 
+.menu .timer, .menu .cal, 
+.menu .media, .menu .quote, 
+.menu .note {
+    position: fixed;
+}
+.widget.music {
+	top: 220px; 
+	left: 100px; 
+	width: 323px; 
+	height: 150px; 
+}
+.widget.task { 
+	top: 450px; 
+	left: 100px; 
+	width: 323px; 
+	height: 400px;
+	justify-content: left;
+	border-radius: 15px;
+	background-color:rgba(255,255,255,0.50);
+}
+input{
+	font-family: Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
+}
+#taskInput {
+	width: 300px;
+    margin: 10px ;
+	border-radius: 15px;
+	text-align: center;
+	font-family: Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
+}
+#taskList {
+    list-style: none;
+    padding: 0;
+	word-wrap: normal;
+}
+
+.taskItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.taskCompleted {
+    text-decoration: line-through;
+}
+.taskCheckbox + span {
+    position: relative;
+    padding-left: 30px; 
+    cursor: pointer;
+}
+.taskText {
+    flex-grow: 1;
+    margin-right: 10px;
+    color: #FFFFFF; 
+	flex-wrap: wrap;
+	word-wrap: break-word;
+}
+.taskCompleted .taskText {
+    text-decoration: line-through;
+    color: #999;
+}
+.widget.timer { 
+	top: 250px; 
+	width: 675px; 
+	height: 250px; 
+}
+.container {
+ display: inline-block;
+ padding: 50px;
+}
+
+.clock {
+ margin-bottom: 20px;
+}
+
+.minutes, .seconds, .colon {
+ display: inline-block;
+ font-size: 80px;
+ margin: 0 5px;
+font-weight: bold;
+}
+
+button {
+	background-color: #FFFFFF;
+	border: none;
+	color: black;
+	cursor: pointer;
+	font-size: 18px;
+	margin: 0 10px;
+	padding: 10px 20px;
+	border-radius: 20px;
+	font-family:Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
+}
+button:hover {
+ 	background-color:#9F9F9F;
+	color: black;
+}
+.widget.cal { 
+	top: 550px;
+	left: 538px;
+	width: 323px; 
+	height: 200px; 
+	border-radius: 15px;
+}
+.calheader {
+	background-color: aliceblue;
+    padding: 10px;
+    text-align: center;
+	font-weight: Bold;
+	color:#00122A;
+}
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+	color:#00122A;
+	background-color:rgba(255,255,255,0.50);
+}
+.day {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+	font-weight: bold;
+	background-color:rgba(255,255,255,0.50);
+}
+.day.today {
+    font-weight: bold;
+    color: #F97566; 
+	background-color: #ccc;
+}
+
+.widget.media { 
+	top: 565px;
+	right: 538px;
+	width: 323px;
+	height: 200px;
+}
+.widget.quote { 
+	top: 250px;
+	right: 120px;
+	width: 302px; 
+	height: 100px; 
+}
+.widget.note { 
+	top: 450px; 
+	right: 100px; 
+	width: 323px; 
+	height: 400px; 
+	
+}
+#textInput {
+            width: 303px;
+            height: 300px;
+			background-color: white;
+            padding: 10px;
+            outline: none;
+            resize: both;
+            overflow: auto;
+            font-family: Consolas, 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', Monaco, 'Courier New', 'monospace';
+			color: #00122A;
+			border-radius: 20px;
+			break-after: auto;
+			background-color:rgba(255,255,255,0.50)
+        }
+video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+	z-index: -1;
+}
